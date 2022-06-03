@@ -24,22 +24,16 @@ def profesores(request):
         return HttpResponse("campo vacio")
 
 def alta_profesores(request):
-    #Formulario para cargar datos en la base de datos sql
-
-
-    if request.method == "POST": #si la peticion se mando como POST hago el alta de datos
-
-        #se le carga el formulario a la variable
+   
+    if request.method == "POST":         
         mi_formulario = Profesores_formulario(request.POST)
-
-        #si se verifica el formulario ok
         if mi_formulario.is_valid():
-            #se validaron los datos y se mandan a datos
             datos=mi_formulario.cleaned_data
-            #desde datos lo pasamos a la base de datos
-            profesor =Profesores(nombre=datos ['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'])
+            profesor =Profesores(nombre=datos['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'])
             profesor.save() 
-            return render(request, "profesores.html")
+            return render(request,"profesores.html")
+    
+    return render(request,"profesores.html")
 
 
 #ALUMNOS BUSQUEDA Y ALTAS
@@ -58,38 +52,40 @@ def alumnos(request):
 
 def alta_alumnos(request):
 
-    if request.method == "POST": #si la peticion se mando como POST hago el alta de datos
-
-        #se le carga el formulario a la variable
+    if request.method == "POST": 
         mi_formulario = Alumnos_formulario(request.POST)
 
-        #si se verifica el formulario ok
         if mi_formulario.is_valid():
-            #se validaron los datos y se mandan a datos
             datos=mi_formulario.cleaned_data
-            #desde datos lo pasamos a la base de datos
-            alumnos =Alumnos(nombre=datos ['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'],clasesMes=datos['clases'], fechaInicio=datos['fecha'])
-            alumnos.save() 
+            alumno =Alumnos(nombre=datos['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'],clasesMes=datos['clases'], fechaInicio=datos['fecha'])
+            alumno.save() 
             return render(request, "alumnos.html")
+        
+    return render(request, "alumnos.html")
+
+
 
 
 #DISCIPLINAS BUSQUEDA Y ALTAS
 
+
+
 def disciplinas(request):
     if request.GET['disciplina']:
         disciplina=request.GET['disciplina']
-        disciplinas= Disciplinas.objects.filter(nombre__icontains = disciplina)
+        disciplinas= Disciplinas.objects.filter(disciplina__icontains = disciplina)
 
         return render(request, 'disciplinas.html' ,{ "disciplina":disciplinas})
 
     else:
         return HttpResponse("campo vacio")
     
+    
 
 
 def alta_disciplinas(request):
 
-     if request.method == "POST": 
+    if request.method == "POST": 
        
         mi_formulario = Disciplinas_formulario(request.POST)
         
@@ -97,5 +93,8 @@ def alta_disciplinas(request):
             datos=mi_formulario.cleaned_data
             disciplinas =Disciplinas(disciplina=datos ['disciplina'], dias=datos['dias'])
             disciplinas.save() 
-            return render(request, "disciplionas.html")
+            return render(request, "disciplinas.html")
+
+    return render(request, "disciplinas.html")
+
         

@@ -3,7 +3,52 @@
 {% load static %}
 
 {% block contenido %}
+<form action="alta_disciplina" method="POST">
+
+    {% csrf_token %} 
+
+    
+
     <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quibusdam odit, delectus nulla rerum saepe quos assumenda placeat veritatis blanditiis enim perferendis et rem atque. Sed ea maiores dolores placeat!
+        Disciplina:
     </p>
+    <input type="text" name="disciplina" required>
+
+    <p>
+        Dias de clases:
+    </p>
+    <input type="text" name="dias" required>
+    <p>
+
+
+
+    <input type="submit" value="Enviar"> 
+
+</form>
+
+<form action="disciplinas">
+    <p>
+        Disciplina
+    </p>
+    <input type="text" name="disciplina" id="disciplina">
+    <input type="submit" value="Buscar">
+
+</form>
+
+    {% if disciplina %}
+        <ul>
+            {%for n in disciplina%}
+            <li>
+                Disciplina: {{n.disciplina}}
+            </li>
+            <li>
+                Dias que se da: {{n.dias}}
+            </li>
+            {% endfor%}
+        </ul>
+    {% else %}
+    <p>	No se encontraron disciplinas</p>
+
+    {% endif %}
+
 {% endblock%}

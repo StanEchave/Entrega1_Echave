@@ -7,14 +7,18 @@ urlpatterns = [
     path("", views.inicio, name="inicio"),
 
     #path para ver y dar de alta los profesores
-    path("profesores",views.profesores, name="profesores"),
-    path("alta_profesor", views.alta_profesores),
+    path("profesores",views.profesores),
+    path("alta_profesor", views.alta_profesores, name="profesores"),
 
     #path para ver y dar de alta los alumnos
-    path("alumnos",views.alumnos, name="alumnos"),
-    path("alta_alumno", views.alta_alumnos),
+    path("alumnos",views.alumnos),
+    path("alta_alumno", views.alta_alumnos , name="alumnos"),
 
     #path para ver y dar de alta las disciplinas
-    path("disciplinas",views.disciplinas, name="disciplinas"),
-    path("alta_disciplina", views.alta_disciplinas),
+    path("disciplinas",views.disciplinas),
+    path("alta_disciplina", views.alta_disciplinas, name="disciplinas"),
+
+
+
+   
 ]

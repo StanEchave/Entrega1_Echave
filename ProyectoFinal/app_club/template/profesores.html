@@ -4,6 +4,58 @@
 
 {% block contenido %}
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt provident quo magni, illo assumenda eveniet! Esse asperiores libero voluptate impedit, alias illum possimus excepturi explicabo dolore ducimus sint error veniam!</p>
+    <form action="alta_profesor" method="POST">
+
+        {% csrf_token %} <!-- el token es de seguridad,siempre que se mande como POST se debe cargar este token-->
+
+        <p>
+            Nombre:
+        </p>
+        <input type="text" name="nombre" required> <!-- se pone el required para q te obligue a llenar el campo-->
+
+        <p>
+            Apellido:
+        </p>
+        <input type="text" name="apellido" required>
+
+        <p>
+            Disciplina:
+        </p>
+        <input type="text" name="disciplina" required>
+
+
+
+        <input type="submit" value="Enviar"> 
+
+    </form>
+
+    <form action="profesores">
+        <p>
+            Nombre
+        </p>
+        <input type="text" name="nombre" id="nombre">
+        <input type="submit" value="Buscar">
+    
+    </form>
+    
+        {% if nombre %}
+            <ul>
+                {%for n in nombre%}
+                <li>
+                    Nombre: {{n.nombre}}
+                </li>
+                <li>
+                    Apellido: {{n.apellido}}
+                </li>
+                <li>
+                    Disciplina: {{n.disciplina}}
+                </li>
+
+                {% endfor%}
+            </ul>
+        {% else %}
+        <p>	No se encontraron profesores</p>
+    
+        {% endif %}
     
 {% endblock%}

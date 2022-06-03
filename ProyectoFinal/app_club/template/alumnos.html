@@ -3,7 +3,41 @@
 {% load static %}
 
 {% block contenido %}
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, exercitationem aliquid dignissimos cum illum quidem ipsam placeat dolorum! Dolores et sequi vitae suscipit excepturi, voluptate consectetur delectus qui quasi dicta.
-    </p>
+
+    <form action="alta_alumno" method="POST">
+
+        {% csrf_token %} <!-- el token es de seguridad,siempre que se mande como POST se debe cargar este token-->
+
+        <p>
+            Nombre:
+        </p>
+        <input type="text" name="nombre" required> <!-- se pone el required para q te obligue a llenar el campo-->
+
+        <p>
+            Apellido:
+        </p>
+        <input type="text" name="apellido" required>
+
+        <p>
+            Disciplina:
+        </p>
+        <input type="text" name="disciplina" required>
+
+        <p>
+            Clases por mes:
+        </p>
+        <input type="number" name="clases" required>
+
+        <p>
+            Fecha de inscripcion:
+        </p>
+        <input type="date" name="fecha" required>
+
+
+
+        <input type="submit" value="Enviar"> 
+
+    </form>
+
+
 {% endblock%}
