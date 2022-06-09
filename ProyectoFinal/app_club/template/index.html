@@ -1,42 +1,98 @@
+    {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'app_club/css/styles.css' %}" rel="stylesheet" />
     <title>Club</title>
 </head>
 <body>
-    <header>
-        <h1>Bienvenidos al Club</h1>
-    </header>
-    <nav>
-        <div>
-            <ul>
-                <li>
-                    <a href="{% url  'inicio' %}">Inicio</a>
-                </li>
-                <li>
-                    <a href="{% url  'profesores' %}">Profesores</a>
-                </li>
-                <li>
-                    <a href="{% url  'alumnos' %}">Alumnos</a>
-                </li>
-                <li>
-                    <a href="{% url  'disciplinas' %}">Disciplinas</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="contenedor"> 
+        <header class="encabezado">
+            
+                <h1 >
+                    <a class="encabezado__titulo" href="{% url  'inicio' %}">
+                        Lubia Fitness Club
+                    </a>
+                </h1>
 
-    {% block contenido %}
+                <nav >
+                    <ul class="encabezado__nav__lista">
+                        <!--ENLACES ABSOLUTOS-->
+
+                        <li class="encabezado__nav__lista__li">
+                            <a class="links" href="{% url  'inicio' %}">
+                                Home
+                            </a>
+                        </li>                               
+
+                        <li class="encabezado__nav__lista__li">
+                            <a class="links" href="{% url  'profesores' %}">
+                                Profesores 
+                            </a>
+                            
+                        </li>
+
+                        <li class="encabezado__nav__lista__li">
+                            <a class="links" href="{% url  'alumnos' %}">
+                                Alumnos
+                            </a>
+                            
+                        </li>
+
+                        <li class="encabezado__nav__lista__li">
+                            <a class="links" href="{% url  'disciplinas' %}">
+                            Disciplinas
+                            </a>
+                        </li>
+                    
+                    </ul>
+                </nav>  
+
+        </header>
 
 
-    {% endblock %}
+        <main class="principal">
+            {% block contenido %}
 
-    <footer>
+                <h3  style="text-align:center ; color:blue;font-size:50px;">Bienvenidos a Lubia, tu mundo Fit</h3>
 
-    </footer>
+            {% endblock %}
+            
+        </main>
+    
+       
+
+        <footer class="pie">
+            
+            <div class="follow" style="text-align:center ;">
+                Seguinos en nuestras redes
+            </div>
+
+            <div class="redes" style="text-align:center ;">   
+
+                <a class="links" href="https://www.twitter.com"target="_blank" >
+                    <img class="link_logo" src="{%  static 'app_club/assets/img/twitter.png' %}" alt="" >
+                </a>
+
+                <a class="links" href="https://www.Facebook.com"target="_blank" >
+                    <img class="link_logo" src="{%  static 'app_club/assets/img/facebook.png' %}" alt="" >
+                </a>
+                
+                <a class="links" href="https://www.instagram.com"target="_blank" >
+                    <img class="link_logo" src="{%  static 'app_club/assets/img/instagram.png' %}" alt="" >
+                </a>
+            </div>
+
+        
+
+            <h3 class="derechos"> Todos los derechos reservados </h3>
+        </footer>
+
+    </div>
 
 </body>
 </html>

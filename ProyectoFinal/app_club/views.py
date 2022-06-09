@@ -5,8 +5,7 @@ from app_club.models import Profesores,Alumnos,Disciplinas
 from app_club.forms import Profesores_formulario, Alumnos_formulario, Disciplinas_formulario
 
 def inicio(request):
-
-    return render( request , "index.html" )
+    return render( request, 'index.html' )
 
 
 #PROFESORES BUSQUEDA Y ALTAS
@@ -18,7 +17,7 @@ def profesores(request):
         #cargo toda la base de datos de Curso y si encuentra el nombre que buscamos
         profesor= Profesores.objects.filter(nombre__icontains = nombre)
 
-        return render(request, 'profesores.html' ,{ "nombre":profesor})
+        return render(request, 'profesores.html' ,{"nombre":profesor})
 
     else:
         return HttpResponse("campo vacio")
@@ -33,6 +32,7 @@ def alta_profesores(request):
             profesor.save() 
             return render(request,"profesores.html")
     
+    
     return render(request,"profesores.html")
 
 
@@ -45,7 +45,7 @@ def alumnos(request):
         #cargo toda la base de datos de Curso y si encuentra el nombre que buscamos
         alumno= Alumnos.objects.filter(nombre__icontains = nombre)
 
-        return render(request, 'alumnos.html' ,{ "nombre":alumno})
+        return render(request, 'alumnos.html' ,{"nombre":alumno})
 
     else:
         return HttpResponse("campo vacio")
@@ -57,10 +57,12 @@ def alta_alumnos(request):
 
         if mi_formulario.is_valid():
             datos=mi_formulario.cleaned_data
-            alumno =Alumnos(nombre=datos['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'],clasesMes=datos['clases'], fechaInicio=datos['fecha'])
+            alumno =Alumnos(nombre=datos['nombre'], apellido=datos['apellido'], disciplina=datos['disciplina'], clasesMes=datos['clasesMes'])
             alumno.save() 
             return render(request, "alumnos.html")
         
+   
+
     return render(request, "alumnos.html")
 
 

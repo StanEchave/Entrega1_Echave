@@ -4,40 +4,112 @@
 
 {% block contenido %}
 
-    <form action="alta_alumno" method="POST">
 
-        {% csrf_token %} <!-- el token es de seguridad,siempre que se mande como POST se debe cargar este token-->
+<div class="total__formulario">
 
-        <p>
-            Nombre:
-        </p>
-        <input type="text" name="nombre" required> <!-- se pone el required para q te obligue a llenar el campo-->
+    <h2 class="formulario__titulo">Alta Alumnos</h2>
 
-        <p>
-            Apellido:
-        </p>
-        <input type="text" name="apellido" required>
+    <form action="alta_alumnos" method="POST" class="formulario" >
+        {% csrf_token %}
 
-        <p>
-            Disciplina:
-        </p>
-        <input type="text" name="disciplina" required>
+        <fieldset class="formulario__field">
+                    
+            <!-- Creamos los diferentes contenedores con la etiqueta div-->
 
-        <p>
-            Clases por mes:
-        </p>
-        <input type="number" name="clases" required>
+            <div class="formulario__field__div">
 
-        <p>
-            Fecha de inscripcion:
-        </p>
-        <input type="date" name="fecha" required>
+                <label class="formulario__label" for="nombre">
+                    Nombre del alumno:
+                </label>  
+               
+                <input class="formulario__field__div__input" type="text" name="nombre" placeholder="nombre" required>
 
+            </div>
 
+            <div class="formulario__field__div">
+                <label class="formulario__label" for="apellido">
+                    Apellido del alumno:
+                </label>         
+                <input class="formulario__field__div__input" type="text" name="apellido" placeholder="apellido" required>
+            </div>
 
-        <input type="submit" value="Enviar"> 
+            <div class="formulario__field__div">
+                <label class="formulario__label" for="disciplina">
+                    Disciplina que aprende el alumno:
+                </label>         
+                <input class="formulario__field__div__input" type="text" name="disciplina" placeholder="disciplina" required>
+            </div>
 
+            <div class="formulario__field__div">
+                <label class="formulario__label" for="clases">
+                    Cantidad de clases:
+                </label>         
+                <input class="formulario__field__div__input" type="number" name="clasesMes" placeholder="clases" required>
+            </div>
+
+            <!-- etiquetas con el type necesario para crear el boton de enviar y borrar la informacion de los input-->
+            <div class="formulario__field__div">
+                <input type="submit" value="enviar">
+              
+            </div>
+                                    
+        </fieldset>
     </form>
+</div>
+
+
+
+
+
+
+    <div class="total__formulario">
+
+        <h2 class="formulario__titulo">Busqueda de Alumnos</h2>
+
+        <form action="alumnos"class="formulario" >
+            
+            <fieldset class="formulario__field">
+                        
+                <div class="formulario__field__div">
+                    <label class="formulario__label" for="profesor">
+                        Buscar alumno por nombre:
+                    </label>         
+                    <input type="text" name="nombre" id="nombre">
+                    <input type="submit" value="Buscar">
+                </div>       
+
+            {% if nombre %}
+                <ul>
+                    {% for n in nombre %}
+                    <li>
+                        Nombre: {{n.nombre}}
+                    </li>
+                    <li>
+                        Apellido: {{n.apellido}}
+                    </li>
+                    <li>
+                        Disciplina: {{n.disciplina}}
+                    </li>
+                    <li>
+                        Clases: {{n.clasesMes}}
+                    </li>
+                  
+    
+                    {% endfor%}
+                </ul>
+            {% else %}
+                 <p>	No se encontraron profesores</p>
+        
+            {% endif %}
+                
+         
+                                        
+            </fieldset>
+        </form>
+    </div>
+
+
+   
 
 
 {% endblock%}

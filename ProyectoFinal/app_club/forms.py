@@ -15,7 +15,7 @@ class Alumnos_formulario(forms.Form):
     apellido= forms.CharField(max_length=40) 
     disciplina=forms.CharField(max_length=40)
     clasesMes=forms.IntegerField()
-    fechaInicio=forms.DateField()
+   
 
 class Disciplinas_formulario(forms.Form):
 

@@ -8,17 +8,15 @@ urlpatterns = [
 
     #path para ver y dar de alta los profesores
     path("profesores",views.profesores),
-    path("alta_profesor", views.alta_profesores, name="profesores"),
+    path("alta_profesores", views.alta_profesores, name="profesores"),
 
     #path para ver y dar de alta los alumnos
     path("alumnos",views.alumnos),
-    path("alta_alumno", views.alta_alumnos , name="alumnos"),
+    path("alta_alumnos", views.alta_alumnos, name="alumnos"),
 
     #path para ver y dar de alta las disciplinas
     path("disciplinas",views.disciplinas),
     path("alta_disciplina", views.alta_disciplinas, name="disciplinas"),
-
-
-
-   
+    
+    
 ]

@@ -3,52 +3,89 @@
 {% load static %}
 
 {% block contenido %}
-<form action="alta_disciplina" method="POST">
 
-    {% csrf_token %} 
 
+<div class="total__formulario">
+
+    <h2 class="formulario__titulo">Alta Disciplinas</h2>
+
+    <form action="alta_disciplina" method="POST" class="formulario" >
+
+        {% csrf_token %}
+
+        <fieldset class="formulario__field">
+                    
+            <!-- Creamos los diferentes contenedores con la etiqueta div-->
+
+            <div class="formulario__field__div">
+
+                <label class="formulario__label" for="disciplina">
+                    disciplina:
+                </label>  
+               
+                <input class="formulario__field__div__input" type="text" name="disciplina" placeholder="disciplina" required>
+
+            </div>
+
+
+            <div class="formulario__field__div">
+                <label class="formulario__label" for="dias">
+                    Dias que se da la clase:
+                </label>         
+                <input class="formulario__field__div__input" type="text" name="dias" placeholder="dias" required>
+            </div>
+
+            
+            <div class="formulario__field__div">
+                <input type="submit" value="Enviar">
+            </div>
+                                    
+        </fieldset>
+    </form>
+</div>
+
+<div class="total__formulario">
+
+    <h2 class="formulario__titulo">Busqueda de disciplinas</h2>
+
+    <form action="disciplinas" class="formulario" >
+
+        <fieldset class="formulario__field">
+                    
+            <!-- Creamos los diferentes contenedores con la etiqueta div-->
+
+            <div class="formulario__field__div">
+
+                <label class="formulario__label" for="disciplina">
+                    Disciplina:
+                </label>  
+               
+                <input type="text" name="disciplina" id="disciplina">
+                <input type="submit" value="Buscar">
+
+            </div>
+
+            {% if disciplina %}
+            <ul>
+                {%for n in disciplina%}
+                <li>
+                    Disciplina: {{n.disciplina}}
+                </li>
+                <li>
+                    Dias que se da: {{n.dias}}
+                </li>
+                {% endfor%}
+            </ul>
+        {% else %}
+        <p>	No se encontraron disciplinas</p>
     
-
-    <p>
-        Disciplina:
-    </p>
-    <input type="text" name="disciplina" required>
-
-    <p>
-        Dias de clases:
-    </p>
-    <input type="text" name="dias" required>
-    <p>
+        {% endif %}
+    
+                                    
+        </fieldset>
+    </form>
+</div>
 
 
-
-    <input type="submit" value="Enviar"> 
-
-</form>
-
-<form action="disciplinas">
-    <p>
-        Disciplina
-    </p>
-    <input type="text" name="disciplina" id="disciplina">
-    <input type="submit" value="Buscar">
-
-</form>
-
-    {% if disciplina %}
-        <ul>
-            {%for n in disciplina%}
-            <li>
-                Disciplina: {{n.disciplina}}
-            </li>
-            <li>
-                Dias que se da: {{n.dias}}
-            </li>
-            {% endfor%}
-        </ul>
-    {% else %}
-    <p>	No se encontraron disciplinas</p>
-
-    {% endif %}
 
 {% endblock%}

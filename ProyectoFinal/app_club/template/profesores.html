@@ -1,61 +1,110 @@
 {% extends "index.html" %} 
 
 {% load static %}
-
+    
 {% block contenido %}
 
-    <form action="alta_profesor" method="POST">
 
-        {% csrf_token %} <!-- el token es de seguridad,siempre que se mande como POST se debe cargar este token-->
+    <div class="total__formulario">
 
-        <p>
-            Nombre:
-        </p>
-        <input type="text" name="nombre" required> <!-- se pone el required para q te obligue a llenar el campo-->
+        <h2 class="formulario__titulo">Alta Profesores</h2>
 
-        <p>
-            Apellido:
-        </p>
-        <input type="text" name="apellido" required>
+        <form action="alta_profesores" method="POST" class="formulario" >
+            {% csrf_token %}
 
-        <p>
-            Disciplina:
-        </p>
-        <input type="text" name="disciplina" required>
+            <fieldset class="formulario__field">
+                        
+                <!-- Creamos los diferentes contenedores con la etiqueta div-->
+
+                <div class="formulario__field__div">
+
+                    <label class="formulario__label" for="nombre">
+                        Nombre del profesor:
+                    </label>  
+                   
+                    <input class="formulario__field__div__input" type="text" name="nombre" placeholder="nombre" required>
+
+                </div>
+
+                <div class="formulario__field__div">
+                    <label class="formulario__label" for="apellido">
+                        Apellido del profesor:
+                    </label>         
+                    <input class="formulario__field__div__input" type="text" name="apellido" placeholder="apellido" required>
+                </div>
+
+                <div class="formulario__field__div">
+                    <label class="formulario__label" for="disciplina">
+                        Disciplina que da el profesor:
+                    </label>         
+                    <input class="formulario__field__div__input" type="text" name="disciplina" placeholder="disciplina" required>
+                </div>
+
+                <!-- etiquetas con el type necesario para crear el boton de enviar y borrar la informacion de los input-->
+                <div class="formulario__field__div">
+                    <input type="submit" value="enviar">
+                    
+                </div>
+                                        
+            </fieldset>
+        </form>
+    </div>
 
 
 
-        <input type="submit" value="Enviar"> 
 
-    </form>
+    <div class="total__formulario">
 
-    <form action="profesores">
-        <p>
-            Nombre
-        </p>
-        <input type="text" name="nombre" id="nombre">
-        <input type="submit" value="Buscar">
+        <h2 class="formulario__titulo">Busqueda de profesores</h2>
+
+        <form action="profesores" class="formulario" >
+            
+            <fieldset class="formulario__field">
+                        
+                <div class="formulario__field__div">
+                    <label class="formulario__label" for="profesor">
+                        Buscar profesor por nombre:
+                    </label>         
+                    <input type="text" name="nombre" id="nombre">
+                    <input type="submit" value="Buscar">
+                </div>       
+
+
+
+
+                
+            {% if nombre %}
+                <ul>
+                    {%for n in nombre%}
+                    <li>
+                        Nombre: {{n.nombre}}
+                    </li>
+                    <li>
+                        Apellido: {{n.apellido}}
+                    </li>
+                    <li>
+                        Disciplina: {{n.disciplina}}
+                    </li>
     
-    </form>
-    
-        {% if nombre %}
-            <ul>
-                {%for n in nombre%}
-                <li>
-                    Nombre: {{n.nombre}}
-                </li>
-                <li>
-                    Apellido: {{n.apellido}}
-                </li>
-                <li>
-                    Disciplina: {{n.disciplina}}
-                </li>
+                    {% endfor%}
+                </ul>
+            {% else %}
+            <p>	No se encontraron profesores</p>
+        
+            {% endif %}
+                                        
+            </fieldset>
+        </form>
+    </div>
 
-                {% endfor%}
-            </ul>
-        {% else %}
-        <p>	No se encontraron profesores</p>
+
+   
+
+
+
+   
+
+
     
-        {% endif %}
     
 {% endblock%}
